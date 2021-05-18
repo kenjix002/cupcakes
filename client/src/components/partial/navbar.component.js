@@ -21,7 +21,7 @@ export default class Navbar extends Component {
                             <Link to="/" className="nav-link" style={modifier}>Home</Link>
                         </li>
                         <li class="nav-item">
-                            <Link to="/shop" className="nav-link" style={modifier}>Shop</Link>
+                            <Link to="/products" className="nav-link" style={modifier}>Shop</Link>
                         </li>
                         <li class="nav-item">
                             <Link to="/login" className="nav-link" style={modifier}>Login / Register</Link>

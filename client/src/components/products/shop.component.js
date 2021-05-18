@@ -1,28 +1,74 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const Product = props => (
+    <div style={{width:"300px",margin:"1%",border:"1px solid black",display:"inline-block"}}>
+
+        {/* <img src={props.product.image} alt="" /> */}
+
+        <div>
+            {props.product.name}
+        </div>
+        <div>
+            {props.product.ingredients}
+        </div>
+        <div>
+            RM {props.product.price}
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input type="number" value="1" className="form-control" style={{width:"20%",display:"inline-block"}}/>
+        </div>
+        <div>
+            <button>Add to cart</button>            
+            <Link to={'/products/edit/'+props.product._id}><button>Edit</button></Link>
+            <button>Delete</button>
+        </div>
+        {props.product._id}
+
+    </div>
+)
+
 
 export default class Shop extends Component {
+    constructor(props){
+        super(props);
+        
+
+        this.state = {products:[]}
+    }
+
+    componentDidMount(){
+        axios.get('http://localhost:5000/products/')
+            .then(res => {
+                this.setState({
+                    products: res.data                    
+                })
+            })
+            .catch(err=>{console.log(err)})            
+    }
+
+    productList(){
+        return this.state.products.map(currentproduct=>{
+            return <Product product={currentproduct} key={currentproduct._id}/>
+        })
+    }
+
     render(){
         return (            
             <div style={{display:"flex"}}>
                 <div style={{flex:1}}>
-                    add product only for admin
+                    <Link to="/products/add"><button className="btn btn-primary col-lg-10">Add Cupcake</button></Link>
                     <br />
                     Search here
                     <br />
                     price range<br />flavour                    
                 </div>
-                <div style={{flex:3, border:"1px solid black"}}>
-                    lists here SHOP
-                    <br />
-                    Per item
-                    <br />
-                    image<br />name<br />price<br />quantity<br />stock remain<br />add cart              
-                    <br />
-                    can edit(remove in edit)/stocks for admin
-                    <br />
-                    limit 4 per row?
-                    <br />max 5 row? per page
+                <div style={{flex:3}}>
+                    <div>
+                        {this.productList()}
+                    </div>
                 </div>
             </div>
         )

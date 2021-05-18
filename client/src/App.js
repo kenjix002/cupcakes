@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route} from "react-router-dom";
 
 import Navbar from "./components/partial/navbar.component"
 import Shop from "./components/products/shop.component"
@@ -16,22 +16,22 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container">        
-        <Route path="/" exact component={Home} />
-        <Route path="/shop"  component={Shop} />
-        <Route path="/login"  component={Login} />
-        <Route path="/register"  component={Register} />
-        <Route path="/forgotten"  component={Forgotten} />
-        <Route path="/cart"  component={Cart} />
+      <div className="container">      
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/products/edit/:id"  component={EditProduct} />
+          <Route path="/products/add"  component={AddProduct} />
+          <Route path="/products"  component={Shop} />
+          <Route path="/login"  component={Login} />
+          <Route path="/register"  component={Register} />
+          <Route path="/forgotten"  component={Forgotten} />
+          <Route path="/cart"  component={Cart} />
         
 
-        <Route path="/product/add"  component={AddProduct} />
-        <Route path="/product/edit/:id"  component={EditProduct} />
-
+        
+        
+        </Switch>
         {/* 
-          product add
-          product edit
-          product stocking 
           product delete  
           
           purchase detail page ( update status available )          
