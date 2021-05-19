@@ -35,7 +35,7 @@ export default class EditProduct extends Component {
     
     async onChangeImage(e){
         const imageFile = e.target.files[0];
-        const imgBase64 = await this.convertImageToBase64(imageFile);
+        const imgBase64 = await this.convertImageToBase64(imageFile);        
         this.setState({
             image:imgBase64
         });
@@ -73,13 +73,13 @@ export default class EditProduct extends Component {
             image: this.state.image,
             name: this.state.name,
             price: this.state.price,
-            ingredients: this.state.ingredients
+            ingredients: JSON.stringify(this.state.ingredients)
         }
-        console.log(product);
-        axios.post('http://localhost:5000/products/add',product)
+
+        axios.post('http://localhost:5000/products/edit/'+this.props.match.params.id,product)
             .then(res => console.log(res.data))
 
-        // window.location = "/";
+        window.location = "/products";
     }
     render(){
         return (            
