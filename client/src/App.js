@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Navbar />
-      <div className="container">      
+      <div>      
         <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/products/edit/:id"  component={EditProduct} />

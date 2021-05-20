@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
+
 export default class Navbar extends Component {
     render(){
         const modifier = {
             textAlign:"center",
-            padding:"20px 50px"
+            padding:"20px 50px",
+            fontWeight:"bold",
+            color:"white"
         }
         return (            
-            <nav class="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"rgba(0,0,0,0.4)"}}>     
+            <nav class="navbar navbar-expand-lg navbar-dark" style={{backgroundColor:"rgba(0,0,0,0.4)",marginBottom:"5rem"}}>     
                 <div className="nav-item" style={{textAlign:"center",width:"10%"}}>
                 <Link to="/" className="nav-link nav-item"><img src={process.env.PUBLIC_URL + '/images/brand.png'} alt=""  style={{width:"60%",height:"auto"}}/></Link>
                 </div>           

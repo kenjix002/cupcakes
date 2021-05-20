@@ -83,7 +83,7 @@ export default class EditProduct extends Component {
     }
     render(){
         return (            
-            <div style={{border:"1px solid black"}}>
+            <div className="container" style={{border:"1px solid black"}}>
                 <h1>Edit Product</h1>
                 <div style={{width:"50%",height:"50%",border:"1px solid black"}}>
                     <img src={this.state.image} alt="" />

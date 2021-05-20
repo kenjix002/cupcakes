@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class Register extends Component {
     render(){
         return (            
-            <div style={{display:'flex'}}>
+            <div className="container" style={{display:'flex'}}>
             
                 <div style={{flex:1, border:"1px solid black"}}>
                     <img src={process.env.PUBLIC_URL + 'images/register.jpg'}  alt="" style={{width:"100%"}} />

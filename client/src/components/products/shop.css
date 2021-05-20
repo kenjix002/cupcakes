@@ -1,0 +1,19 @@
+
+.product_main {
+    width: 300px;
+    margin: 1%;
+    border: 2px solid rgba(0,0,0,1);
+    border-radius: 0.4rem;
+    display: inline-block;    
+    box-shadow: 3px 3px 4px rgba(0,0,0,1);
+    background-color: rgba(255, 250, 222,1);
+}
+
+.product_body {
+    padding: 0 1rem 1rem 1rem;
+}
+
+.product_image {
+    text-align: center;
+    padding: 0.5rem 0;
+}

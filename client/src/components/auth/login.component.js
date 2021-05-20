@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default class Login extends Component {
     render(){
         return (            
-            <div style={{display:'flex'}}>
+            <div className="container" style={{display:'flex'}}>
             
                 <div style={{flex:1}}>
                     <img src={process.env.PUBLIC_URL + 'images/login.jpg'}  alt=""  style={{width:"100%",height:"100%"}} />

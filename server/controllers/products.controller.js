@@ -2,7 +2,7 @@ const Product = require("../models/product.model");
 
 exports.getAllProducts = async ( req ,res) => {  
     const currentPage = parseInt(req.query.page) || 1;
-    const limitPerPage = parseInt(req.query.limit) || 7;
+    const limitPerPage = parseInt(req.query.limit) || 5;
     const skip = ( currentPage - 1 ) * limitPerPage;
     const total = await Product.countDocuments();
     const totalPages = Math.ceil(total/limitPerPage);

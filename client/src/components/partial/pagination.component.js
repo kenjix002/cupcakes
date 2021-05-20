@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { Link } from 'react-router-dom';
 
-const Pagination = ()=>{
+import "./pagination.css"
 
-    let middlePagination = [...Array(5)].map((_,index)=>(
-        <button>
+const Pagination = ({page,pages,changePage})=>{
+
+    let middlePagination = [...Array(pages)].map((_,index)=>(
+        <button onClick={()=>changePage(`${index+1}`)} disabled={index+1 == page} className="pagination_button">
             {index+1}
         </button>
     ))
     
     return (
         <div>
-            <button>&#171;</button>
-            {middlePagination}            
-            <button>&#187;</button>
+            <button onClick={()=>changePage("minus")} disabled={page === 1} className="pagination_button">&#171;</button>
+            {middlePagination}
+            <button onClick={()=>changePage("plus")} disabled={page === pages} className="pagination_button">&#187;</button>
         </div>
     )
 }
