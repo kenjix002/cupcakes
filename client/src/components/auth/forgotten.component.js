@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import "./auth.css"
+
 export default class Forgotten extends Component {
     render(){
         return (            
-            <div className="container" style={{display:'flex'}}>
+            <div className="container auth_main">
             
-                <div style={{flex:1, border:"1px solid black"}}>
-                    <img src={process.env.PUBLIC_URL + 'images/forgotten.jpg'}  alt="" style={{width:"100%"}} />
+                <div className="auth_image">
+                    <img src={process.env.PUBLIC_URL + 'images/forgotten.jpg'}  alt="" width="100%" />
                 </div>          
                 
-                <div style={{flex:1, border:"1px solid black"}}>
+                <div className="auth_form_main">
                     <h1>Forgotten Password?</h1>
-                    <form>
-                        <div className="form-group">
+                    <hr />
+                    <form className="auth_form_input">
+                        <div className="form-group push_down">
                             <label>Username</label>
                             <input type="text" name="username" id="username" className="form-control" placeholder="username . . ." />
                         </div>

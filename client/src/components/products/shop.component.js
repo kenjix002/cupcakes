@@ -8,7 +8,7 @@ import "./shop.css"
 const Product = props => (
     
     <div className="product_main">
-        <div className="product_image">
+        <div className="product_image">            
             <img src={props.product.image} alt="cupcake" width="280px" style={{borderRadius:"0.3rem"}}/>
         </div>
         <hr />
@@ -29,7 +29,7 @@ const Product = props => (
             <hr />
             <div className="product_price">
                 <label>Price: &emsp;</label>
-                RM {props.product.price}
+                RM {props.product.price.toFixed(2)}
             </div>
             <hr />
             <div className="product_quantity">
@@ -68,7 +68,15 @@ export default class Shop extends Component {
                     products: res.data.data
                 })
             })
-            .catch(err=>{console.log(err)})            
+            .catch(err=>{console.log(err)})
+
+        axios.get('http://localhost:5000/products/ingredients')
+            .then(res => {
+                this.setState({
+                    ingredients: res.data
+                })
+            })
+            .catch(err=>{console.log(err)})                 
     }
 
     deleteProduct(id){
@@ -86,14 +94,14 @@ export default class Shop extends Component {
     }
 
     async changePage(string){
-        if(string == "plus"){
+        if(string === "plus"){
             if (this.state.page < this.state.pages){
                 await this.setState({
                     page: this.state.page + 1
                 })
             }
         }
-        else if (string == "minus"){        
+        else if (string === "minus"){        
             if (this.state.page > 1){
                 await this.setState({
                     page: this.state.page - 1
@@ -120,17 +128,32 @@ export default class Shop extends Component {
     render(){
         return (            
             <div className="container" style={{display:"flex"}}>
-                <div style={{flex:1}}>
+                <div style={{flex:1 , borderRight:"1px solid black",marginRight:"1rem"}}>
                     <Link to="/products/add"><button className="btn btn-primary col-lg-10">Add Cupcake</button></Link>
                     
-                    <div>
-                        ingredients tick box
+                    <div style={{marginTop:"2rem"}}>
+                        <h4>Ingredients</h4>
+                        <hr />
+                        {
+                           this.state.ingredients === undefined ? "" 
+                           : this.state.ingredients.map ( item => (
+                                <div>
+                                    <input type="checkbox" value={item}/>&emsp;{item}
+                                </div>
+                            ))
+                        }
                     </div>
+                    <hr />
                     <div>
-                        price range
+                        <h4>Price</h4>
+                        <hr />          
+                        <div>
+                            MYR 0 - MYR 'dynamic'
+                        </div>          
+                        <input type="range" min="0" max="500" value="500" step="1"/>
                     </div>
                 </div>
-                <div style={{flex:3}}>
+                <div style={{flex:5}}>
                     { this.state.pages > 1 ? <Pagination page={this.state.page} pages={this.state.pages} changePage={this.changePage} /> : "" }                    
                     <div>
                         {this.productList()}

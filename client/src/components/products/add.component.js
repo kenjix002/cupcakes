@@ -28,6 +28,7 @@ export default class AddProduct extends Component {
         });
     }
     convertImageToBase64(file){
+        if (!file) return
         return new Promise((resolve,reject)=>{
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);
@@ -70,21 +71,23 @@ export default class AddProduct extends Component {
     }
     render(){
         return (            
-            <div className="container" style={{border:"1px solid black"}}>
+            <div className="container product_form_main">
                 <h1>Add New Product</h1>
-                <div style={{width:"50%",height:"50%",border:"1px solid black"}}>
-                    <img src={this.state.image} alt="" />
+                <div className="product_form_image" style={{width:"50%",height:"50%",border:"1px solid black"}}>
+                    { !this.state.image ? <div className="product_form_noimage">Image Preview Here</div> : "" }
+                    <img src={this.state.image} alt="" width="100%" style={{borderRadius:"1rem"}} />
                 </div>
+                <hr />
                 <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
+                    <div className="form-group push_below">
                         <label >Image</label>
                         <input type="file" className="form-control" onChange={this.onChangeImage}/>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group push_below">
                         <label >Name</label>
                         <input type="text" className="form-control" value={this.state.name}  onChange={this.onChangeName}/>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group push_below">
                         <label >Price</label>
                         <input type="number" className="form-control" value={this.state.price}  onChange={this.onChangePrice}/>
                     </div>
@@ -93,7 +96,7 @@ export default class AddProduct extends Component {
                         <input type="text" className="form-control" value={this.state.ingredients}  onChange={this.onChangeIngredients}/>
                     </div>
                     <br />
-                    <div className="form-group">
+                    <div className="form-group push_below">
                         <input type="submit" value="Add New Product" className="btn btn-primary" />
                         <button className="btn btn-warning" onClick={this.props.history.goBack} style={{float:"right"}}>back</button>
                     </div>

@@ -1,0 +1,34 @@
+.product_form_main {
+    border:1px solid black;
+    width: 30%;
+    border-radius: 1rem;
+    background-color: bisque;
+}
+
+.product_form_image{
+    border: 1px solid black;
+    width: 100%;
+    padding: 0.2rem;
+    border-radius: 1rem;
+    background-color: white;
+}
+
+.push_below{
+    margin-bottom: 1rem;
+}
+
+.product_form_main label{
+    font-weight: bold;
+}
+
+.product_form_main span{
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.product_form_noimage {
+    text-align: center;
+    line-height: 20vh;
+    font-weight: bold;
+    text-shadow: 4px 4px 5px;
+}

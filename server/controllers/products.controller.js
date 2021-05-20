@@ -2,7 +2,7 @@ const Product = require("../models/product.model");
 
 exports.getAllProducts = async ( req ,res) => {  
     const currentPage = parseInt(req.query.page) || 1;
-    const limitPerPage = parseInt(req.query.limit) || 5;
+    const limitPerPage = parseInt(req.query.limit) || 6;
     const skip = ( currentPage - 1 ) * limitPerPage;
     const total = await Product.countDocuments();
     const totalPages = Math.ceil(total/limitPerPage);
@@ -71,4 +71,19 @@ exports.deleteProduct = (req,res) => {
     Product.findByIdAndDelete(req.params.id)
         .then(()=>res.json("Product deleted!"))
         .catch(err => res.status(400).json('Error: ' + err ));
+}
+
+exports.getUniqueIngredients = (req,res) => {
+    Product.find({}).select({ingredients:1})
+        .then( ingredients => {
+            unique = []
+            ingredients.forEach( set =>{
+                set.ingredients.forEach( item => {
+                    if(!unique.includes(item))
+                        unique.push(item)                    
+                })
+            })
+            res.json(unique)
+        })
+        .catch( err => console.log(err) )
 }

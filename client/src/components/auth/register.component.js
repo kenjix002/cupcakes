@@ -1,27 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import "./auth.css"
+
 export default class Register extends Component {
     render(){
         return (            
-            <div className="container" style={{display:'flex'}}>
+            <div className="container auth_main">
             
-                <div style={{flex:1, border:"1px solid black"}}>
-                    <img src={process.env.PUBLIC_URL + 'images/register.jpg'}  alt="" style={{width:"100%"}} />
+                <div className="auth_image">
+                    <img src={process.env.PUBLIC_URL + 'images/register.jpg'}  alt="" width="100%"/>
                 </div>          
                 
-                <div style={{flex:1, border:"1px solid black"}}>
+                <div className="auth_form_main" style={{flex:1, border:"1px solid black"}}>
                     <h1>Registration</h1>
-                    <form>
-                        <div className="form-group">
+                    <hr />
+                    <form className="auth_form_input">
+                        <div className="form-group push_down">
                             <label>Username</label>
                             <input type="text" name="username" id="username" className="form-control" />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group push_down">
                             <label>Email</label>
                             <input type="email" name="email" id="email" className="form-control" />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group push_down">
                             <label>Password</label>
                             <input type="password" name="password" id="password" className="form-control" />
                         </div>

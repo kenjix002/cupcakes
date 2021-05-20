@@ -1,0 +1,93 @@
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+    font-size: 3rem;
+}
+
+.home_image{
+    height:95vh;
+    margin-top: -1rem;
+    overflow: hidden;
+    padding-top: 3rem;
+    text-align: center;
+}
+
+.home_image_box {
+    width: 100%;
+    height: 720px;
+    margin-left: -4px;
+    overflow: hidden;
+}
+
+.home_image_each {
+    margin-left: -90%;
+}
+
+.home_image h2{
+    padding: 1rem;
+    font-size: 4rem;    
+}
+
+.home_about {
+    height: 95vh;
+    position: relative;
+}
+
+.home_about h2 {    
+    font-size: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-decoration: underline;
+}
+
+.home_about p {
+    font-size: 2rem;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: justify;
+    width: 90%;
+    margin-left: 5%;
+}
+
+.home_about_product {
+    border-radius: 1rem;
+    padding: 3rem 10rem;        
+    margin-left: 30%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.2);
+    font-size: 5rem;
+    color: black;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-decoration: none;
+}
+
+.home_about_product:hover {
+    color: black;
+}
+
+.home_contact{
+    height: 30vh;
+    background-color: black;
+    color: white;
+}
+
+.home_contact h2 {
+    padding: 2rem 0;    
+    text-decoration: underline;
+}
+
+.home_contact_body {
+    display: flex;
+}
+
+.home_contact_body div {
+    flex:1;
+}
+
+.home_contact_body div:nth-child(1) p,
+.home_contact_body div:nth-child(1) h5{
+    margin-left: 50%;    
+}
+
+.home_contact_body div:nth-child(1) p{
+    line-height: 1rem;
+}

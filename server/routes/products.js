@@ -7,6 +7,8 @@ router.route('/').get(ProductController.getAllProducts)
 
 router.route('/add').post(ProductController.addProduct)
 
+router.route('/ingredients').get(ProductController.getUniqueIngredients)
+
 router.route('/:id').get(ProductController.getOneProduct)
 
 router.route('/edit/:id').post(ProductController.editProduct);

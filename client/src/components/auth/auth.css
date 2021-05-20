@@ -1,0 +1,35 @@
+.auth_main {
+    width: 50%;
+    display: flex;
+    overflow: hidden;
+}
+
+.auth_image {
+    flex:1;
+    border-radius: 2rem 0 0 2rem;
+    overflow: hidden;
+}
+
+.auth_form_main {
+    flex:1;
+    background-color: bisque;
+    border-radius: 0 2rem 2rem 0;
+    overflow: hidden;
+}
+
+.auth_form_main h1{
+    text-align: center;
+    padding-top: 2rem;
+}
+
+.auth_form_input{
+    padding:1rem;
+}
+
+.auth_form_input label {
+    font-weight: bold;
+}
+
+.push_down {
+    margin-bottom: 1rem;
+}
