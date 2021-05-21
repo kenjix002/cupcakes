@@ -17,7 +17,8 @@ export default class EditProduct extends Component {
             image: "",
             name:"",
             price:0,            
-            ingredients:""
+            ingredients:"",
+            previous_image:""
         }
     }
     componentDidMount(){
@@ -36,12 +37,24 @@ export default class EditProduct extends Component {
     
     async onChangeImage(e){
         const imageFile = e.target.files[0];
-        const imgBase64 = await this.convertImageToBase64(imageFile);        
+        let prev = "";
+        
+        if(this.state.previous_image === ""){
+            this.setState({
+                previous_image: this.state.image
+            })
+        }
+        else {
+            prev = this.state.previous_image;
+        }
+
+        const imgBase64 = await this.convertImageToBase64(imageFile) || prev;       
         this.setState({
             image:imgBase64
         });
     }    
-    convertImageToBase64(file){
+    convertImageToBase64(file){        
+        if (!file) return
         return new Promise((resolve,reject)=>{
             const fileReader = new FileReader();
             fileReader.readAsDataURL(file);

@@ -21,7 +21,7 @@ const ImageSlider = props => (
 )
 
 export default class Home extends Component {
-    render(){
+    render(){        
         return (            
             <div>
                 <div className="home_image">
@@ -39,6 +39,7 @@ export default class Home extends Component {
                         maximus, nisi ante blandit libero, eget hendrerit massa nulla et odio. Nulla malesuada 
                         velit eu vestibulum ultrices. Cras fringilla metus ut diam molestie, sit amet aliquet leo fringilla.
                     </p>
+                    <br />
                     <p>
                         Etiam ac sodales libero. Fusce non nisl augue. 
                         Vestibulum turpis lorem, ultrices in urna at, congue sodales mi. 
@@ -48,8 +49,8 @@ export default class Home extends Component {
                         risus sit amet libero volutpat, ac tempus ipsum tempor. Pellentesque vel sapien id justo efficitur cursus. 
                         Vestibulum at lectus ac eros aliquam efficitur quis ac enim.
                     </p>
-                    <div>
-                        <Link to="/products" className="home_about_product">Here to Shop</Link>
+                    <div className="home_about_product">
+                        <Link to="/products" className="home_about_product_btn">To Shopping!</Link>
                     </div>
                 </div>
 
@@ -61,12 +62,12 @@ export default class Home extends Component {
                             <p>4 Jalan Tandang 46050</p>
                             <p>Petaling Jaya, Selangor</p>
                             <p>Malaysia</p>
-                        </div>
+                        </div>                        
                         <div>
                             <h5>Email:</h5>
                             <p>cupcake.shop@cupcake.com</p>                            
                             <h5>Contact Number / Whatsapp:</h5> 
-                            <p>012-3456789</p>
+                            <p>03-83456789</p>
                         </div>
                     </div>
                 </div>

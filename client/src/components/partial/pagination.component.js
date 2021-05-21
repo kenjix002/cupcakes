@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import axios from 'axios'
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 import "./pagination.css"
 
 const Pagination = ({page,pages,changePage})=>{
 
     let middlePagination = [...Array(pages)].map((_,index)=>(
-        <button onClick={()=>changePage(`${index+1}`)} disabled={index+1 == page} className="pagination_button">
+        <button onClick={()=>changePage(`${index+1}`)} disabled={index+1 === page} className="pagination_button">
             {index+1}
         </button>
     ))

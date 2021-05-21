@@ -29,7 +29,6 @@ h2 {
 }
 
 .home_about {
-    height: 95vh;
     position: relative;
 }
 
@@ -49,10 +48,17 @@ h2 {
 }
 
 .home_about_product {
+    padding: 5rem 0;
+}
+
+.home_about_product_btn {
     border-radius: 1rem;
-    padding: 3rem 10rem;        
-    margin-left: 30%;
-    position: absolute;
+    display: block;    
+    width: 40%;
+    padding: 2rem 0;
+    text-align: center;
+    margin:0 auto;
+    border: 1px solid black;
     background-color: rgba(0,0,0,0.2);
     font-size: 5rem;
     color: black;
@@ -60,14 +66,14 @@ h2 {
     text-decoration: none;
 }
 
-.home_about_product:hover {
+.home_about_product_btn:hover {
     color: black;
 }
 
 .home_contact{
-    height: 30vh;
     background-color: black;
     color: white;
+    display: block;
 }
 
 .home_contact h2 {
@@ -90,4 +96,9 @@ h2 {
 
 .home_contact_body div:nth-child(1) p{
     line-height: 1rem;
+}
+
+.home_contact_body div:nth-child(1) {
+    border-right: 5px solid white;
+    margin-right: 2rem;
 }

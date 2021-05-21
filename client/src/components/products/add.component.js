@@ -63,7 +63,7 @@ export default class AddProduct extends Component {
             price: this.state.price,
             ingredients: this.state.ingredients
         }
-        console.log(product);
+        
         axios.post('http://localhost:5000/products/add',product)
             .then(res => console.log(res.data))
 

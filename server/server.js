@@ -23,10 +23,12 @@ connection.once('open',()=>{
 const productsRouter = require('./routes/products');
 const usersRouter = require('./routes/users');
 const cartsRouter = require('./routes/carts');
+const adminRouter = require('./routes/admin');
 
 app.use('/products',productsRouter);
 app.use('/users',usersRouter);
 app.use('/carts',cartsRouter);
+app.use('/admin',adminRouter);
 
 // listen
 app.listen(port, ()=>{

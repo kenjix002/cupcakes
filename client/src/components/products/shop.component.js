@@ -9,7 +9,7 @@ const Product = props => (
     
     <div className="product_main">
         <div className="product_image">            
-            <img src={props.product.image} alt="cupcake" width="280px" style={{borderRadius:"0.3rem"}}/>
+            <img src={props.product.image} alt="cupcake" width="100%" style={{borderRadius:"0.3rem"}}/>
         </div>
         <hr />
         <div className="product_body">
@@ -34,13 +34,18 @@ const Product = props => (
             <hr />
             <div className="product_quantity">
                 <label>Quantity: &emsp;</label>
-                <input type="number" value="1" className="form-control" style={{width:"20%",display:"inline-block"}}/>
+                <input type="number" className="form-control" style={{width:"20%",display:"inline-block"}}/>
             </div>
             <hr />
             <div>
-                <Link to={'/'}><button className="btn btn-primary">Add to cart</button></Link>&emsp;
-                <Link to={'/products/edit/'+props.product._id}><button className="btn btn-info">Edit</button></Link>
-                <button onClick={()=>props.deleteProduct(props.product._id)} style={{float:"right"}} className="btn btn-danger">Delete</button>
+                
+                <button className="btn btn-primary" onClick={()=>props.addToCart(props.product._id,1)}>Add to cart</button>&emsp;
+                {props.role === "admin" ? 
+                    <div style={{display:"inline"}}>
+                        <Link to={'/products/edit/'+props.product._id}><button className="btn btn-info">Edit</button></Link>
+                        <button onClick={()=>props.deleteProduct(props.product._id)} style={{float:"right"}} className="btn btn-danger">Delete</button>
+                    </div>
+                : ""}
             </div>
         </div>
 
@@ -54,8 +59,11 @@ export default class Shop extends Component {
         
         this.deleteProduct = this.deleteProduct.bind(this);
         this.changePage = this.changePage.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
-        this.state = {products:[]}
+        this.state = {
+            products:[]
+        }
     }
 
     componentDidMount(){
@@ -76,7 +84,21 @@ export default class Shop extends Component {
                     ingredients: res.data
                 })
             })
-            .catch(err=>{console.log(err)})                 
+            .catch(err=>{console.log(err)})  
+        
+        this.checkUser()
+    }
+
+    // BAD
+    checkUser(){
+        const userid = localStorage.getItem("id");        
+        axios.get("http://localhost:5000/users/getUser?id="+userid)
+            .then( res =>{
+                this.setState({
+                    user:res.data.username,
+                    role:res.data.role
+                })
+            })
     }
 
     deleteProduct(id){
@@ -87,9 +109,18 @@ export default class Shop extends Component {
         })
     }
 
+    addToCart(id,quantity){
+        const data = {
+            id:id,
+            quantity:quantity
+        }
+        axios.post("http://localhost:5000/carts/add",data)
+            .then(res => console.log(res.data))
+    }
+
     productList(){
         return this.state.products.map(currentproduct=>{
-            return <Product product={currentproduct} key={currentproduct._id} deleteProduct={this.deleteProduct} />
+            return <Product product={currentproduct} key={currentproduct._id} deleteProduct={this.deleteProduct} addToCart={this.addToCart} role={this.state.role}/>
         })
     }
 
@@ -129,8 +160,10 @@ export default class Shop extends Component {
         return (            
             <div className="container" style={{display:"flex"}}>
                 <div style={{flex:1 , borderRight:"1px solid black",marginRight:"1rem"}}>
-                    <Link to="/products/add"><button className="btn btn-primary col-lg-10">Add Cupcake</button></Link>
-                    
+                    { this.state.role === "admin" ? 
+                        <Link to="/products/add"><button className="btn btn-primary col-lg-10">Add Cupcake</button></Link>
+                        : ""
+                    }
                     <div style={{marginTop:"2rem"}}>
                         <h4>Ingredients</h4>
                         <hr />
