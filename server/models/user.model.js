@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 
 const Schema = mongoose.Schema;
 
-const address = new Schema({
+const location = new Schema({
     street: { type:String, trim:true },
     zipcode: { type:Number },
     city: { type:String, trim:true }
@@ -15,7 +15,7 @@ const userSchema = new Schema({
     email: { type:String, required:true, trim:true, tolowercase:true, unique:true, match: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ },
     password: { type:String, required:true, select:false, minlength:6 },
     phone: { type:String, trim:true },
-    addresses: { address },
+    address:  location ,
     role: { type:String, required:true, trim:true, tolowercase:true }
 },{
     timestamps: true,

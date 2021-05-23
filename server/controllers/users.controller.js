@@ -1,19 +1,15 @@
-let User = require('../models/user.model');
+const User = require('../models/user.model');
 
 exports.register = (req,res,next) => {
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
-    const phone = req.body.phone;
-    const addresses = req.body.addresses;
     const role = "member";
 
     const newUser = new User({
         username,
         email,
         password,
-        phone,
-        addresses,
         role
     })
 
@@ -53,7 +49,7 @@ const sendToken = (user,statusCode,res) => {
 
 exports.getOneUser = (req,res)=>{
     const id = req.query.id;
-    const user = User.findOne({_id:id}).select({"username":1,"role":1})
+    const user = User.findOne({_id:id})
         .then( user => res.json(user))
         .catch( err => res.status(401).json("Error: " + err ))
 }

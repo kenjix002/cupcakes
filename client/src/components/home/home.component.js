@@ -12,8 +12,8 @@ const images = [
 
 const ImageSlider = props => (
     <div className="" style={{display:"flex"}}>
-        {images.map( image => (
-            <div className="home_image_box">
+        {images.map( (image,index) => (
+            <div className="home_image_box" key={index}>
                 <img className="home_image_each" src={image} alt="" width="1280"/>
             </div>
         ))}

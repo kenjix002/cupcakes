@@ -1,4 +1,4 @@
-let Cart = require('../models/cart.model');
+const Cart = require('../models/cart.model');
 
 
 exports.getList = (req,res) => {

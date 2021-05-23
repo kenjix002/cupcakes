@@ -1,0 +1,10 @@
+.cart_total_item {
+    position: absolute;
+    border-radius: 50%;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.7rem;
+    top: 20%;
+    right: 32%;
+    background-color: white;
+    font-weight: bold;
+}

@@ -5,8 +5,7 @@ import axios from 'axios';
 import Pagination from "../partial/pagination.component"
 import "./shop.css"
 
-const Product = props => (
-    
+const Product = props => (    
     <div className="product_main">
         <div className="product_image">            
             <img src={props.product.image} alt="cupcake" width="100%" style={{borderRadius:"0.3rem"}}/>
@@ -32,14 +31,8 @@ const Product = props => (
                 RM {props.product.price.toFixed(2)}
             </div>
             <hr />
-            <div className="product_quantity">
-                <label>Quantity: &emsp;</label>
-                <input type="number" className="form-control" style={{width:"20%",display:"inline-block"}}/>
-            </div>
-            <hr />
-            <div>
-                
-                <button className="btn btn-primary" onClick={()=>props.addToCart(props.product._id,1)}>Add to cart</button>&emsp;
+            <div>                
+                <button className="btn btn-primary" onClick={()=>props.addToCart(props.product._id)}>Add to cart</button>&emsp;
                 {props.role === "admin" ? 
                     <div style={{display:"inline"}}>
                         <Link to={'/products/edit/'+props.product._id}><button className="btn btn-info">Edit</button></Link>
@@ -48,7 +41,6 @@ const Product = props => (
                 : ""}
             </div>
         </div>
-
     </div>
 )
 
@@ -109,13 +101,20 @@ export default class Shop extends Component {
         })
     }
 
-    addToCart(id,quantity){
+    addToCart(id){
         const data = {
-            id:id,
-            quantity:quantity
+            productid:id,
+            quantity:1,
+            user:this.state.user
         }
-        axios.post("http://localhost:5000/carts/add",data)
-            .then(res => console.log(res.data))
+
+        if(this.state.user){
+            axios.post("http://localhost:5000/carts/add",data)        
+        }
+        else {
+            // save to localstorage
+            console.log("in guest mode")
+        }
     }
 
     productList(){

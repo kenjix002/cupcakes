@@ -5,7 +5,7 @@ import "./pagination.css"
 const Pagination = ({page,pages,changePage})=>{
 
     let middlePagination = [...Array(pages)].map((_,index)=>(
-        <button onClick={()=>changePage(`${index+1}`)} disabled={index+1 === page} className="pagination_button">
+        <button onClick={()=>changePage(`${index+1}`)} disabled={index+1 === page} className="pagination_button" key={index}>
             {index+1}
         </button>
     ))

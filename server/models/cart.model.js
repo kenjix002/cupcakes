@@ -1,16 +1,23 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const item = new Schema({
+    productid: String,
+    quantity: Number
+})
 
-// const exerciseSchema = new Schema({
-//     username: {type: String, required:true},
-//     description: {type: String, required: true},
-//     duration: {type: Number, required:true},
-//     date: {type:Date,required:true}
-// },{
-//     timestamps: true,
-// })
+const cartSchema = new Schema({
+        userid: String,
+        cart:[ item ],
+        method: String,
+        totalprice: Number,
+        complete: Boolean,
+        delivered: Boolean
+    }   
+    ,{
+        timestamps: true
+    })
 
-// const Exercise = mongoose.model('Exercise',exerciseSchema);
+const Cart = mongoose.model('Cart',cartSchema);
 
-// module.exports = Cart
+module.exports = Cart

@@ -12,7 +12,7 @@ app.use(express.json({limit:"6mb"}));
 
 // mongoDB atlas connection
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri,{useNewUrlParser:true, useCreateIndex:true});
+mongoose.connect(uri,{useNewUrlParser:true, useCreateIndex:true, useFindAndModify:false});
 
 const connection = mongoose.connection;
 connection.once('open',()=>{
