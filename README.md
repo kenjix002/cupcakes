@@ -27,10 +27,12 @@ This is the demo for my assignment
 
 1. open terminal
 2. go to ./client folder
-3. Run 'npm start' to start the server for the react-client
+3. Install npm package with 'npm install'
+4. Run 'npm start' to start the server for the react-client
 
 ## Server-side
 
 1. open terminal
 2. go to ./server folder
-3. Run 'npm start' to start the NodeJS backend server
+3. Install npm package with 'npm install'
+4. Run 'npm start' to start the NodeJS backend server
