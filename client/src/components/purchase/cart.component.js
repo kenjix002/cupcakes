@@ -218,7 +218,7 @@ export default class Cart extends Component {
                 <div style={{display:"flex"}}>
                     <div className="form-group cart_input_div">
                         <label>Contact Number</label>
-                        <input type="text" className="form-control" value={this.state.phone} onChange={this.onChangePhone} />
+                        <input type="text" className="form-control" value={this.state.phone} onChange={this.onChangePhone} required />
                     </div>
                     <div className="form-group cart_input_div">
                         <label>Pickup Time</label>

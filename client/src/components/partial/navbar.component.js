@@ -32,11 +32,13 @@ export default class Navbar extends Component {
     async checkUser(){
         const userid = localStorage.getItem("id");        
         await axios.get("http://localhost:5000/users/getUser?id="+userid)
-            .then( async res =>{  
-                await this.setState({
-                    user:res.data.username,
-                    role:res.data.role
-                })
+            .then( async res =>{                  
+                if (res.data !== null){
+                    await this.setState({
+                        user:res.data.username !== undefined ? res.data.username : "",
+                        role:res.data.role !== undefined ? res.data.role : ""
+                    })
+                }
             })
     }
 

@@ -42,7 +42,7 @@ const Product = props => (
                 {props.role === "admin" ? 
                     <div style={{display:"inline"}}>
                         <Link to={'/products/edit/'+props.product._id}><button className="btn btn-info">Edit</button></Link>
-                        <button onClick={()=>props.deleteProduct(props.product._id)} style={{float:"right"}} className="btn btn-danger">Delete</button>
+                        <button onClick={()=>props.deleteProduct(props.product._id)} style={{float:"right"}} className="btn btn-danger" disabled>Delete</button>
                     </div>
                 : ""}
             </div>
@@ -99,10 +99,12 @@ export default class Shop extends Component {
         const userid = localStorage.getItem("id");        
         axios.get("http://localhost:5000/users/getUser?id="+userid)
             .then( res =>{
-                this.setState({
-                    user:res.data.username,
-                    role:res.data.role
-                })
+                if (res.data !== null){
+                    this.setState({
+                        user:res.data.username,
+                        role:res.data.role
+                    })
+                }
             })
     }
 

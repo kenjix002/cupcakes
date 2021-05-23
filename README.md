@@ -1,10 +1,10 @@
 # About
 
-This is the demo for my assignment
+This is the demo for my assignment with MERN stack
 
 # Feature
 
-- Admin create / edit / delete product
+- Admin create / edit / ~~delete~~ product
 - Customer add product to cart ( login required )
 - Cart System
 - filter search product
@@ -28,11 +28,28 @@ This is the demo for my assignment
 1. open terminal
 2. go to ./client folder
 3. Install npm package with 'npm install'
-4. Run 'npm start' to start the server for the react-client
+4. Run 'npm start' to start the server for the react-client at port 3000 (default)
 
 ## Server-side
 
 1. open terminal
 2. go to ./server folder
 3. Install npm package with 'npm install'
-4. Run 'npm start' to start the NodeJS backend server
+4. Run 'npm start' to start the NodeJS backend server at port 5000 (default)
+    - can set the port in .env PORT 
+
+## Demo Credential
+
+  
+| Username |Password  |Role  |
+|--|--|--|
+|admin123  |admin123  |admin  |
+|testuser1  |user123  |member  |
+|testuser2  |user123  |member  |
+|testuser3  |user123  |member  |
+|testuser4  |user123  |member  |
+  
+
+# Update
+
+- removed delete feature

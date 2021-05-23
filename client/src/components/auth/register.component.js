@@ -92,19 +92,19 @@ export default class Register extends Component {
                     <form className="auth_form_input" onSubmit={this.onSubmit}>
                         <div className="form-group push_down">
                             <label>Username</label>
-                            <input type="text" name="username" id="username" className="form-control" value={this.state.username} onChange={this.onChangeUsername} />
+                            <input type="text" name="username" id="username" className="form-control" placeholder="username . . ." value={this.state.username} onChange={this.onChangeUsername} />
                         </div>
                         <div className="form-group push_down">
                             <label>Email</label>
-                            <input type="email" name="email" id="email" className="form-control" value={this.state.email} onChange={this.onChangeEmail}  />
+                            <input type="email" name="email" id="email" className="form-control" placeholder="email . . ." value={this.state.email} onChange={this.onChangeEmail}  />
                         </div>
                         <div className="form-group push_down">
                             <label>Password</label>
-                            <input type="password" name="password" id="password" className="form-control" value={this.state.password} onChange={this.onChangePassword}  />
+                            <input type="password" name="password" id="password" className="form-control" placeholder="password . . ." value={this.state.password} onChange={this.onChangePassword}  />
                         </div>
                         <div className="form-group">
                             <label>Confirm Password</label>
-                            <input type="password" name="confirm-password" id="confirm-password" className="form-control" value={this.state.confirmpass} onChange={this.onChangeConfirmPass}  />
+                            <input type="password" name="confirm-password" id="confirm-password" className="form-control" placeholder="retype password . . ." value={this.state.confirmpass} onChange={this.onChangeConfirmPass}  />
                         </div>       
                         <br />
                         <div className="form-group">
