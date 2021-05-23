@@ -84,10 +84,10 @@ export default class Cart extends Component {
                 this.setState({
                     user:res.data.username,
                     role:res.data.role,
-                    phone:res.data.phone,
-                    street:res.data.address.street || "",
-                    zipcode:res.data.address.zipcode || "",
-                    city:res.data.address.city || ""
+                    phone:res.data.phone !==undefined ? res.data.phone : "",
+                    street: res.data.address !==undefined ? res.data.address.street : "",
+                    zipcode:res.data.address !==undefined ? res.data.address.zipcode : "",
+                    city:res.data.address !==undefined ? res.data.address.city : ""
                 })
             })
     }
@@ -175,7 +175,7 @@ export default class Cart extends Component {
             delivered:false,
             totalprice:this.finalSum().toFixed(2),
             street:this.state.street,
-            zipcode:this.state.zipcode,
+            zipcode:this.state.zipcode.toString(),
             city:this.state.city
         }
 
@@ -196,15 +196,15 @@ export default class Cart extends Component {
                 <div style={{display:"flex"}}>
                     <div className="form-group cart_input_div">
                         <label>Contact Number</label>
-                        <input type="text" className="form-control" value={this.state.phone} onChange={this.onChangePhone}/>
+                        <input type="text" className="form-control" value={this.state.phone} onChange={this.onChangePhone} required />
                     </div>
                     <div className="form-group cart_input_div">
                         <label>Street</label>
-                        <input type="text" className="form-control" value={this.state.street} onChange={this.onChangeAddressStreet} />                        
+                        <input type="text" className="form-control" value={this.state.street} onChange={this.onChangeAddressStreet} required />                        
                         <label>Zipcode</label>
-                        <input type="text" className="form-control" value={this.state.zipcode} onChange={this.onChangeAddressZipcode} />
+                        <input type="number" className="form-control" value={this.state.zipcode} onChange={this.onChangeAddressZipcode} required />
                         <label>City</label>
-                        <input type="text" className="form-control" value={this.state.city} onChange={this.onChangeAddressCity} />
+                        <input type="text" className="form-control" value={this.state.city} onChange={this.onChangeAddressCity} required />
                     </div>
                 </div>
             </div>
