@@ -42,7 +42,7 @@ export default class Login extends Component {
             .then( res =>{ 
                 localStorage.setItem("authToken",res.data.token)
                 localStorage.setItem("id",res.data.id)
-                window.location = "/" 
+                window.location = "/users/"+this.state.username 
             })
             .catch( ()=>{ 
                 this.setState({

@@ -38,3 +38,52 @@
     color:red;
     text-align: center;
 }
+
+.user_page_main {
+    background-color: rgb(255, 251, 233);
+    border-radius: 1rem;
+    padding-bottom: 2rem;
+}
+
+.user_greeting {
+    font-size: 3rem;
+    padding-top: 1rem;
+}
+
+.user_pending {
+    border: 1px solid black;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.user_completed {
+    border:1px solid black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+thead th {
+    border:2px solid black;
+    text-align: center;
+    height: 5vh;
+}
+
+tbody td {
+    border:1px solid black;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+.usercart_item {
+    width: 20%;
+    text-align: right;
+    padding: 1rem 1rem 1rem 0;
+}

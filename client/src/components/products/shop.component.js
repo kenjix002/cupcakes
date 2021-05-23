@@ -32,7 +32,13 @@ const Product = props => (
             </div>
             <hr />
             <div>                
-                <button className="btn btn-primary" onClick={()=>props.addToCart(props.product._id)}>Add to cart</button>&emsp;
+                <button className="btn btn-primary" onClick={()=>{
+                        props.addToCart(props.product._id);
+                        props.msgprompt();
+                    }} disabled={!props.user}>
+                        Add to cart
+                </button>
+                &emsp;
                 {props.role === "admin" ? 
                     <div style={{display:"inline"}}>
                         <Link to={'/products/edit/'+props.product._id}><button className="btn btn-info">Edit</button></Link>
@@ -52,9 +58,16 @@ export default class Shop extends Component {
         this.deleteProduct = this.deleteProduct.bind(this);
         this.changePage = this.changePage.bind(this);
         this.addToCart = this.addToCart.bind(this);
+        this.onChangePriceFilter = this.onChangePriceFilter.bind(this);
+        this.onChangeIngredientFilter = this.onChangeIngredientFilter.bind(this);
+        this.onSearchSubmit = this.onSearchSubmit.bind(this);
+        this.addCartMessagePrompt = this.addCartMessagePrompt.bind(this);
 
         this.state = {
-            products:[]
+            products:[],
+            pricefilter:30,
+            ingredientfilter:[],
+            message:""
         }
     }
 
@@ -111,16 +124,22 @@ export default class Shop extends Component {
         if(this.state.user){
             axios.post("http://localhost:5000/carts/add",data)        
         }
-        else {
-            // save to localstorage
-            console.log("in guest mode")
-        }
     }
 
     productList(){
-        return this.state.products.map(currentproduct=>{
-            return <Product product={currentproduct} key={currentproduct._id} deleteProduct={this.deleteProduct} addToCart={this.addToCart} role={this.state.role}/>
-        })
+        if(this.state.products.length > 0){
+            return this.state.products.map(currentproduct=>{
+                return <Product product={currentproduct} key={currentproduct._id} deleteProduct={this.deleteProduct} 
+                        addToCart={this.addToCart} role={this.state.role} user={this.state.user} msgprompt={this.addCartMessagePrompt}/>
+            })
+        }
+        else {
+            return (
+                <div className="product_empty">
+                    No item within search criteria
+                </div>
+            )
+        }
     }
 
     async changePage(string){
@@ -155,14 +174,68 @@ export default class Shop extends Component {
             .catch( err => console.log(err))
     }
 
+    onChangePriceFilter(e){
+        this.setState({
+            pricefilter:e.target.value
+        })        
+    }
+    onChangeIngredientFilter(e){
+        let ingredients = this.state.ingredientfilter;
+        let checked = e.target.checked;
+        const value = e.target.value;
+
+        if (checked){
+            ingredients.push(value);
+        }
+        else {
+            let index = ingredients.indexOf(value);
+            ingredients.splice(index,1);
+        }
+        this.setState({
+            ingredientfilter:ingredients
+        })
+    }
+
+    onSearchSubmit(e){
+        e.preventDefault();
+
+        const ingredientfilter = this.state.ingredientfilter;
+        const pricefilter = this.state.pricefilter;
+
+        console.log(ingredientfilter)
+
+        axios.get(`http://localhost:5000/products?page=1&pricefilter=${pricefilter}&ingredientfilter=${ingredientfilter}`)
+            .then(res => {
+                this.setState({
+                    page:res.data.page,
+                    pages:res.data.pages,
+                    count:res.data.count,
+                    products: res.data.data
+                })
+            })
+            .catch(err=>{console.log(err)})
+    }
+
+    async addCartMessagePrompt(){        
+        await this.setState({
+            message:"Item Added to Cart"
+        })
+        setTimeout(()=>{
+            this.setState({
+                message:""
+            })
+        },2000)
+    }
+
     render(){
         return (            
-            <div className="container" style={{display:"flex"}}>
+            <div className="container" style={{display:"flex"}}>                
                 <div style={{flex:1 , borderRight:"1px solid black",marginRight:"1rem"}}>
                     { this.state.role === "admin" ? 
                         <Link to="/products/add"><button className="btn btn-primary col-lg-10">Add Cupcake</button></Link>
                         : ""
                     }
+                    <form onSubmit={this.onSearchSubmit}>
                     <div style={{marginTop:"2rem"}}>
                         <h4>Ingredients</h4>
                         <hr />
@@ -170,7 +243,7 @@ export default class Shop extends Component {
                            this.state.ingredients === undefined ? "" 
                            : this.state.ingredients.map ( item => (
                                 <div>
-                                    <input type="checkbox" value={item}/>&emsp;{item}
+                                    <input type="checkbox" value={item} onChange={this.onChangeIngredientFilter} />&emsp;{item}
                                 </div>
                             ))
                         }
@@ -180,12 +253,24 @@ export default class Shop extends Component {
                         <h4>Price</h4>
                         <hr />          
                         <div>
-                            MYR 0 - MYR 'dynamic'
+                            Filter: less than MYR {this.state.pricefilter}
                         </div>          
-                        <input type="range" min="0" max="500" value="500" step="1"/>
+                        <span>0</span>
+                        &emsp;
+                        <input type="range" min="0" max="100" value={this.state.pricefilter} step="1" onChange={this.onChangePriceFilter} />
+                        &emsp;
+                        <span>100</span>
                     </div>
+                    <hr />
+                    <div>
+                        <input type="submit" value="Filter" className="btn btn-primary col-lg-10" />
+                    </div>
+                    </form>
                 </div>
                 <div style={{flex:5}}>
+                    <div className="message">
+                        {this.state.message}
+                    </div>
                     { this.state.pages > 1 ? <Pagination page={this.state.page} pages={this.state.pages} changePage={this.changePage} /> : "" }                    
                     <div>
                         {this.productList()}

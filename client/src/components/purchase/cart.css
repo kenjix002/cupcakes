@@ -11,7 +11,7 @@
 .cart_body {
     border: 1px solid rgba(0,0,0,0.2);
     height: 50vh;
-    overflow-y: scroll;    
+    overflow-y: auto;    
 }
 
 .cart_body_empty {

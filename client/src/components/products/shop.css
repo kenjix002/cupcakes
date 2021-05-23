@@ -17,3 +17,21 @@
     text-align: center;
     padding: 0.5rem 0;
 }
+
+.product_empty{
+    text-align: center;
+    margin-top: 15rem;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.message {
+    position: fixed;
+    top: 10rem;
+    width: 50%;
+    text-align: center;
+    font-size: 2rem;
+    color: green;
+    background-color: white;
+    border-radius: 1rem;
+}

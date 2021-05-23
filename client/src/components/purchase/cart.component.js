@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DateTimePicker  from 'react-datetime-picker';
 
-import "./cart.css"
-
+import "./cart.css";
 
 const CartItem = props =>(
     <div>
@@ -63,7 +62,6 @@ export default class Cart extends Component {
         this.state = {
             method:"",
             phone:"",
-            total:0,
             street:"",
             zipcode:"",
             city:"",
@@ -87,7 +85,9 @@ export default class Cart extends Component {
                     user:res.data.username,
                     role:res.data.role,
                     phone:res.data.phone,
-                    address:res.data.address || {street:"",zipcode:"",city:""}
+                    street:res.data.address.street || "",
+                    zipcode:res.data.address.zipcode || "",
+                    city:res.data.address.city || ""
                 })
             })
     }
@@ -95,10 +95,18 @@ export default class Cart extends Component {
     async findCart(){
         await axios.get("http://localhost:5000/carts?user="+this.state.user)
             .then(cart =>{
-                this.setState({
-                    cart:cart.data.cart,
-                    cartid:cart.data._id
-                })
+                if (cart.data !== null){
+                    this.setState({
+                        cart:cart.data.cart,
+                        cartid:cart.data._id
+                    })
+                }
+                else {
+                    this.setState({
+                        cart:[],
+                        cartid:""
+                    })
+                }
             })
     }
 
@@ -145,7 +153,6 @@ export default class Cart extends Component {
     }
 
     onRemoveProduct(id,productid){
-        console.log(id,productid)
 
         const cartindex = this.state.cart.map(item=>{return item.productid}).indexOf(productid);
         const productindex = this.state.products.map(item=>{return item.data._id}).indexOf(productid);
@@ -153,19 +160,20 @@ export default class Cart extends Component {
         this.state.cart.splice(cartindex,1);
         this.state.products.splice(productindex,1);
 
-        axios.post("http://localhost:5000/carts/remove",{id,productid})        
+        axios.post("http://localhost:5000/carts/remove",{id,productid});
     }
 
     onSubmit(e){
         e.preventDefault();
         
         const cart = {
+            user:this.state.user,
             cartid:this.state.cartid,
             phone:this.state.phone,
             method:this.state.method,
             complete:true,
             delivered:false,
-            totalprice:this.state.total,
+            totalprice:this.finalSum().toFixed(2),
             street:this.state.street,
             zipcode:this.state.zipcode,
             city:this.state.city
@@ -178,7 +186,7 @@ export default class Cart extends Component {
         axios.post("http://localhost:5000/carts/completecart",cart)
             .then(()=>console.log("complete"))
 
-        // window.location="/admin"
+        window.location="/users/"+this.state.user;
     }
 
     deliveryInfo(){
@@ -236,7 +244,6 @@ export default class Cart extends Component {
         })
     }
 
-
     finalSum(){
         const eachfinalprice = this.state.cart.map( item => {            
             const productindex = this.state.products.map( product =>{
@@ -251,7 +258,7 @@ export default class Cart extends Component {
         const overalltotal = eachfinalprice.reduce( (total,price)=>{
             return total + price;
         },0);
-
+        
         return overalltotal;
     }
 

@@ -3,11 +3,20 @@ const Product = require("../models/product.model");
 exports.getAllProducts = async ( req ,res) => {  
     const currentPage = parseInt(req.query.page) || 1;
     const limitPerPage = parseInt(req.query.limit) || 6;
-    const skip = ( currentPage - 1 ) * limitPerPage;
-    const total = await Product.countDocuments();
+    const skip = ( currentPage - 1 ) * limitPerPage; 
+
+    const pricefilter = parseInt(req.query.pricefilter) || 100;
+    const ingredientfilter = req.query.ingredientfilter || "";
+    
+    let filterlist = {price:{$lte:pricefilter}}
+    if (ingredientfilter.length > 0){
+        filterlist.ingredients = {$in:ingredientfilter.split(',')}
+    }
+    
+    const total = await Product.countDocuments(filterlist);
     const totalPages = Math.ceil(total/limitPerPage);
 
-    await Product.find().skip(skip).limit(limitPerPage)
+    await Product.find(filterlist).skip(skip).limit(limitPerPage)
         .then( products =>{             
             res.json({
                 page: currentPage,

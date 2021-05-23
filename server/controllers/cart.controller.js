@@ -59,7 +59,7 @@ exports.findCart = async (req,res) => {
     const user = req.query.user;
     const userid = await getUserId(user);    
 
-    Cart.findOne({userid:userid})
+    Cart.findOne({userid:userid,complete:false})
         .then( cart => res.json(cart) )
         .catch( err => res.status(400).json({error:err}))
 }
@@ -80,16 +80,31 @@ exports.removeCartItem = async (req,res) => {
 }
 
 exports.complete = async (req,res) => {
+    const username = req.body.user;
+    const cartid = req.body.cartid;
 
-    // cartid:this.state.cartid,
-    // phone:this.state.phone,
-    // method:this.state.method,
-    // complete:true,
-    // delivered:false,
-    // totalprice:this.state.total,
-    // street:this.state.street,
-    // zipcode:this.state.zipcode,
-    // city:this.state.city
+    const cart = {
+        method : req.body.method,
+        totalprice : req.body.totalprice,
+        complete : req.body.complete,
+        date : req.body.date,
+        deliveryStatus: "Waiting Pickup"
+    }
 
-    console.log("complete")
+    const userdata = {        
+        phone : req.body.phone,
+        address:{
+            street : req.body.street,
+            zipcode : req.body.zipcode,
+            city : req.body.city
+        }
+    }
+
+    const userid = await getUserId(username);
+
+    Cart.findOneAndUpdate({_id:cartid},cart)
+        .then(cart=>console.log("cart completed"))    
+
+    User.findOneAndUpdate({_id:userid},userdata)
+        .then(user => console.log("user updated"))
 }

@@ -12,7 +12,9 @@ const cartSchema = new Schema({
         method: String,
         totalprice: Number,
         complete: Boolean,
-        delivered: Boolean
+        delivered: Boolean,
+        date: Date,
+        deliveryStatus: String
     }   
     ,{
         timestamps: true

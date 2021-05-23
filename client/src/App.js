@@ -10,7 +10,7 @@ import Register from "./components/auth/register.component";
 import Cart from "./components/purchase/cart.component";
 import AddProduct from "./components/products/add.component";
 import EditProduct from "./components/products/edit.component";
-import Admin from "./components/admin/admin.component";
+import UserPage from "./components/auth/user.component";
 
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
               <Route path="/login"  component={Login} />
               <Route path="/register"  component={Register} />
               <Route path="/cart"  component={Cart} />
-              <Route path="/admin"  component={Admin} />
+              <Route path="/users/:username"  component={UserPage} />
           </Switch>
         </div>
     </Router>
