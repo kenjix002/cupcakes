@@ -9,7 +9,7 @@ const CartItem = props =>(
         <div className="cart_item">            
             <div style={{display:"flex"}}>
                 <div className="cart_item_remove">
-                    <a href="#" onClick={()=>props.removeProduct(props.cartid,props.product.data._id)}>&#10060;</a>                    
+                    <a href="#!" onClick={()=>props.removeProduct(props.cartid,props.product.data._id)}>&#10060;</a>                    
                 </div>
                 <div className="cart_item_image">
                     <img src={props.product.data.image} alt="" style={{maxHeight:"10vh"}} />                    

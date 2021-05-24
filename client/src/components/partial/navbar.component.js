@@ -108,7 +108,7 @@ export default class Navbar extends Component {
                         }
                         {this.state.user?
                             <li className="nav-item">                              
-                                <a href="#" className="nav-link" style={modifier} onClick={this.logout}>Logout</a>
+                                <a href="#!" className="nav-link" style={modifier} onClick={this.logout}>Logout</a>
                             </li>  : ""
                         }
                     </ul>
